@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cors({
     origin: function (origin, callback) {
+        console.log("Request Origin:", origin);
         if (!origin || originsAllowed.includes(origin)) {
             callback(null, true)
         } else {
