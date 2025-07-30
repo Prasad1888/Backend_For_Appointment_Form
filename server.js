@@ -11,7 +11,7 @@ const {json} = bodyParser
 
 const PORT = process.env.PORT || 3000
 const reqUrl = process.env.URL
-const originsAllowed = [process.env.CLIENT_URL || 'CLIENT_URL=http://localhost:5173']
+const originsAllowed = [process.env.CLIENT_URL || 'http://localhost:5173']
 
 app.use(express.json())
 
