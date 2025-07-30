@@ -7,7 +7,7 @@ const app = express()
 dotenv.config()
 
 import bodyParser from 'body-parser'
-const {json} = bodyParser
+const { json } = bodyParser
 
 const PORT = process.env.PORT || 3000
 const reqUrl = process.env.URL
@@ -18,8 +18,15 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cors({
-    origin: originsAllowed,
-    methods: ['POST']
+    origin: function (origin, callback) {
+        if (!origin || originsAllowed.includes(origin)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    methods: ['GET', 'POST'],
+    credentials: true
 }))
 
 if (!reqUrl) {
@@ -27,7 +34,7 @@ if (!reqUrl) {
     process.exit(1)
 }
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
     res.json({
         message: 'Success in running server'
     })
