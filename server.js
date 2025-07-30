@@ -27,6 +27,12 @@ if (!reqUrl) {
     process.exit(1)
 }
 
+app.get('/', (req,res)=>{
+    res.json({
+        message: 'Success in running server'
+    })
+})
+
 app.post('/submit', async (req, res) => {
     try {
         await axios.post(reqUrl, req.body)
